@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/defenseunicorns/pkg/helpers/v2"
 	"github.com/defenseunicorns/pkg/oci"
 	"github.com/defenseunicorns/uds-cli/pkg/legacy/config"
 	"github.com/defenseunicorns/uds-cli/pkg/legacy/utils"
@@ -106,17 +105,5 @@ func filterPkgPaths(pkgLayout *layout.PackageLayout, includeLayers []string, opt
 			}
 		}
 	}
-
-	// ensure zarf.yaml, checksums and SBOMS (if exists) are always included
-	// note we may have extra SBOMs because they are not filtered or modified
-	pkgDir := pkgLayout.DirPath()
-	alwaysInclude := []string{filepath.Join(pkgDir, layout.ZarfYAML), filepath.Join(pkgDir, layout.Checksums)}
-	if pkgLayout.ContainsSBOM() {
-		alwaysInclude = append(alwaysInclude, filepath.Join(pkgDir, layout.SBOMTar))
-	}
-	filteredPaths = helpers.MergeSlices(filteredPaths, alwaysInclude, func(a, b string) bool {
-		return a == b
-	})
-
 	return filteredPaths
 }

@@ -5,7 +5,7 @@
 
 ### ⚠ BREAKING CHANGES
 
-* Legacy Go integrations must use Zarf's api.Package and api.Component types for package readers and fetchers. CLI commands and Next public APIs remain compatible.
+* Legacy Go integrations must use Zarf's `api.Package` and `api.Component` types for package readers and fetchers. CLI commands remain compatible. Next Go integrations that access native Zarf types through `ZarfPackageLayout.PackageDefinition` must also account for Zarf v0.89's API changes, including `ImageArchive.Images` changing from `[]string` to `[]api.ArchiveImage`.
 
 ### Features
 
